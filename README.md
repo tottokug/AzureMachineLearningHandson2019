@@ -269,3 +269,11 @@ print(run.get_portal_url())
 ws.delete(delete_dependent_resources=True)
 ```
 
+
+## まとめ
+Azure Machine Learning service では機械学習モデルをスケーリング、監視、デプロイするための呼び出し可能なサービスが提供されることを学習しました。 それは、統合された Azure サービスでデータ サイエンス パイプラインを強化および拡張するためのものです。 Azure Machine Learning service SDK を使用すると、必要なときに必要なサービスをどれでも使用することができます。
+
+好みの Python ツールとオープン ソース フレームワークを使用して、ローカル コンピューターでモデルの開発を始めることができます。 その後、Python モジュールを通して Azure Machine Learning service を使用し、モデルのトレーニングと評価、ハイパーパラメーターの調整、および呼び出し可能な REST API を使用した完全なデプロイを短時間で行うことができます。
+
+自動化された機械学習パイプラインを作成するためのデータ サイエンス プロセスのさまざまなステップに Azure Machine Learning service を適用する方法を学習しました。 ポータルを使用して Azure Machine Learning ワークスペースを作成する方法と、Python スクリプトで直接作成する方法を学習しました。 ワークスペースは、実験に必要なオブジェクトのコンテナーです。
+

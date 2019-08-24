@@ -99,3 +99,171 @@ Azure Machine Learning service の主要なコンポーネントについて考�
 ### IoT モジュールとは
 IoT モジュールは Docker コンテナーです。 Web サービスと同様に、モデル、関連するスクリプトまたはアプリケーション、およびその他の依存関係が必要です。 サービスの詳細については、IoT Edge (https://docs.microsoft.com/azure/iot-edge/) を参照してください。 これを使用してホスティング デバイスを監視できます。
 
+## パイプラインを作成する
+Python SDK では、Azure Machine Learning パイプラインを操作するインターフェイスが提供されています。 SDK には、ステップの順次実行と並列実行のための命令型コンストラクトが含まれます。 目標は、最適な実行を実現することです。
+
+すべてのデータ ソース、入力、出力は、パイプライン全体で再利用できるように、厳密に名前付けされています。 記録された中間タスクとデータによって、チームのコラボレーションとコミュニケーションが促進されます。
+
+次の図はパイプラインの例です。
+
+![pipeline-example](./images/5-pipeline-example.png)
+Azure Machine Learning パイプラインの機能の一部を次に示します。
+
+- タスクと実行のスケジュールを設定できます。それによって、データ サイエンティストの空き時間が増えます (特にデータの準備段階)。
+
+- 個々のステップにコンピューティング先を柔軟に割り当てて、複数のパイプラインを調整できます。
+
+- パイプライン スクリプトを再利用し、さまざまなプロセス (再トレーニングやバッチスコアリングなど) 用にカスタマイズすることができます。
+
+- すべての入力、出力、中間タスク、およびデータを記録し、管理することができます。
+
+## 実験サービスを使用してモデルをトレーニングする
+新しいワークスペースと実験を作成しましょう。 Azure portal または Python コードを使用して、ワークスペースを簡単に設定できます。 ここでは、各アプローチについて説明します。
+
+### Azure portal を使用してワークスペースを作成する
+Azure portal でワークスペースを作成するには、次の手順を実行します。
+
+1. Azure サブスクリプションを使用して、Azure portal  にサインインします。
+
+1. ポータル上部の [検索] ボックスに「machine learning service workspaces」と入力します。
+
+1. [サービス] の [Machine Learning service ワークスペース] オプションを選択します。
+![select-ml-service-workspace](./images/6-select-ml-service-workspace.png)
+1. Machine Learning service のワークスペース ウィンドウの左上にある [追加] を選択し、ワークスペースを作成するために必要な情報を入力します。
+
+|フィールド|説明|
+|---|---|
+|ワークスペース名|ワークスペースの一意名を入力します。 この例では、docs-ws を使用します。 名前は、リソース グループ全体で一意である必要があります。 覚えやすく、他のユーザーが作成したワークスペースと異なる名前を使用します。|
+|サブスクリプション|使用する Azure サブスクリプションを選択します|
+|リソース グループ|サブスクリプションの既存のリソース グループを使用するか、任意の名前を入力して新しいリソース グループを作成します。 リソース グループは、Azure ソリューション用に関連するリソースを保持するコンテナーです。 この例では、docs-aml を使用します。|
+|場所|ユーザーとデータ リソースに最も近い場所を選択します。 この場所に、ワークスペースが作成されます。|
+![create-ml-service-workspace](./images/6-create-ml-service-workspace.png)
+
+5. 新しく作成したワークスペースで [Azure Notebooks を開きます] を選択して最初の実験を作成します。
+
+1. Azure portal でワークスペースの作成に使用したものと同じ Microsoft アカウントでサインインします。
+
+1. サインイン後、新しいタブが開き、[Clone Library](ライブラリの複製) プロンプトが表示されます。 [複製] を選択し、ノートブックを実行します。
+
+1. 2 つのノートブックと共に Config.json ファイルが表示されます。 この構成ファイルには、作成したワークスペースに関する情報が含まれています。
+
+1. 01.run-experiment.ipynb を選択してノートブックを開きます。
+
+1. 一度に 1 つずつセルを実行するか (Shift+Enter キー)、[セル] > [すべて実行] を選択してノートブック全体を実行します。 セルの横にアスタリスク (*) が表示されているときは実行中です。 そのセルのコードが完了すると、数値が表示されます。
+
+1. ノートブック内のセルがすべて実行された後は、記録された値をワークスペースで確認できるようになります。
+
+1. ポータル ページに戻り、[実験を表示します] を選択してから、[my-first-experiment] を選択してモデルの実行レポートを表示します。
+
+### Python を使用してワークスペースを作成する
+
+Python を使用してワークスペースを作成するには:
+
+1. Anaconda、Miniconda、Python 仮想環境などの Python 環境をインストールします。
+
+1. 分離された Python 環境を作成します。
+
+1. コマンドラインまたはターミナル ウィンドウを開き、Python 3.6 を使用して myenv という名前の新しい Conda 環境を作成します。
+
+```
+# Create
+conda create -n myenv -y Python=3.6
+# Activate
+conda activate myenv
+```
+
+4. SDK をインストールします。
+
+1. 以下のコードを使用して、Machine Learning SDK と Jupyter Notebook サーバーのコア コンポーネントをインストールします。
+
+```
+# Install Jupyter
+conda install nb_conda
+
+# Install the base SDK and Jupyter Notebook
+pip install azureml-sdk[notebooks]
+```
+
+6. Jupyter Notebook を起動します。
+
+```
+# Launch
+jupyter notebook
+```
+7. ブラウザーで新しいノートブックを作成し、Python 3 カーネルを選択してから、必要に応じて Azure portal にサインインします。
+
+8. 次の Python コードを実行して、各 {placeholder} をサブスクリプションに適した値に置き換えます。
+
+```
+import azureml.core
+print(azureml.core.VERSION)
+
+from azureml.core import Workspace
+ws = Workspace.create(name='myworkspace',
+            subscription_id='{azure-subscription-id}', 
+            resource_group='{resource-group-name}',
+            create_resource_group = True,
+            location='{location}'
+            )
+```
+
+|フィールド|説明|
+|---|---|
+|ワークスペース名|ワークスペースの一意名を入力します。 この例では、docs-ws を使用します。 名前は、リソース グループ全体で一意である必要があります。 覚えやすく、他のユーザーが作成したワークスペースと異なる名前を使用します。
+|サブスクリプション|使用する Azure サブスクリプションを選択します。|
+|リソース グループ|サブスクリプションの既存のリソース グループを使用するか、任意の名前を入力して新しいリソース グループを作成します。 リソース グループは、Azure ソリューション用に関連するリソースを保持するコンテナーです。 この例では、docs-aml を使用します。|
+|場所|ユーザーとデータ リソースに最も近い場所を選択します。 この場所に、ワークスペースが作成されます。|
+
+9. 関連付けられているストレージ、コンテナー レジストリ、キー コンテナーなど、ワークスペースの詳細を表示するには、次のコードを使用します。
+
+```
+ws.get_details()
+```
+
+10. 構成ファイルを記述します。
+
+ワークスペースの詳細を、現在のディレクトリの JSON 構成ファイルに保存する必要があります。 write_config() アプリケーション プログラミング インターフェイス (API) 呼び出しでは、構成ファイルが現在のディレクトリに作成されます。 config.json ファイルには、以下が含まれています。
+
+```
+{
+    "subscription_id": "{azure-subscription-id}",
+    "resource_group": "{resource-group-name}",
+    "workspace_name": "myworkspace"
+}
+```
+11. 次のコードで、構成ファイルが作成されます。
+```
+# Create the configuration file.
+ws.write_config()
+```
+
+12. ワークスペースを使用します。
+```
+from azureml.core import Experiment
+
+# create an experiment
+exp = Experiment(workspace=ws, name='trial_exp')
+
+# start a run
+run = exp.start_logging()
+
+# log a number
+run.log('trail', 30)
+
+# log a list (Fibonacci numbers)
+run.log_list('my list', [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]) 
+
+# finish the run
+run.complete()
+```
+
+13. ログに記録された結果を表示します。
+```
+print(run.get_portal_url())
+```
+リンクでは、Azure portal のログに記録された値に移動します。
+
+14. リソースをクリーンアップします。
+```
+ws.delete(delete_dependent_resources=True)
+```

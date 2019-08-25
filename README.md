@@ -140,11 +140,21 @@ Azure portal でワークスペースを作成するには、次の手順を実�
 
 ![create-ml-service-workspace](./images/6-create-ml-service-workspace.png)
 
-5. 新しく作成したワークスペースで [Azure Notebooks を開きます] を選択して最初の実験を作成します。
+5. 新しく作成したワークスペースを開き、AssetsからExperimentsを
+
+![DeployComplete](./images/DeployComplete.png)
+
+[リソースに移動]を選択してAzure Machine Learning Services
+
+![Experiments](./images/Experiments.png)
+
+6. [Azure Notebooks を開きます] を選択して最初の実験を作成します。
 
 1. Azure portal でワークスペースの作成に使用したものと同じ Microsoft アカウントでサインインします。
 
-1. サインイン後、新しいタブが開き、[Clone Library](ライブラリの複製) プロンプトが表示されます。 [複製] を選択し、ノートブックを実行します。
+![CloneProject](./images/CloneProject.png)
+
+8. サインイン後、Clone Project(ライブラリの複製) プロンプトが表示されます。 Clone(複製)を選択し、ノートブックを実行します。
 
 1. 2 つのノートブックと共に Config.json ファイルが表示されます。 この構成ファイルには、作成したワークスペースに関する情報が含まれています。
 

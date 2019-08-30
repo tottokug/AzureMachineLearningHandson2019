@@ -1,9 +1,5 @@
 # Azure Machine Learning Handson2019
 
-## 概要
-
-## 準備
-
 ## はじめに
 データ サイエンティストが行う主なタスクの 1 つは、データセットから予測モデルを構築することです。 このようなモデルをワークストリームに組み込むと、コスト予測、変更予測、またはイベント パターンの分析を行って不整合を見つけることができます。 Azure Machine Learning service には、データを準備し、モデルを構築するさまざまな手順を支援するための一連の SDK とクラウド サービスが用意されています。
 
@@ -107,6 +103,7 @@ Python SDK では、Azure Machine Learning パイプラインを操作するイ�
 次の図はパイプラインの例です。
 
 ![pipeline-example](./images/5-pipeline-example.png)
+
 Azure Machine Learning パイプラインの機能の一部を次に示します。
 
 - タスクと実行のスケジュールを設定できます。それによって、データ サイエンティストの空き時間が増えます (特にデータの準備段階)。
@@ -286,4 +283,10 @@ Azure Machine Learning service では機械学習モデルをスケーリング�
 好みの Python ツールとオープン ソース フレームワークを使用して、ローカル コンピューターでモデルの開発を始めることができます。 その後、Python モジュールを通して Azure Machine Learning service を使用し、モデルのトレーニングと評価、ハイパーパラメーターの調整、および呼び出し可能な REST API を使用した完全なデプロイを短時間で行うことができます。
 
 自動化された機械学習パイプラインを作成するためのデータ サイエンス プロセスのさまざまなステップに Azure Machine Learning service を適用する方法を学習しました。 ポータルを使用して Azure Machine Learning ワークスペースを作成する方法と、Python スクリプトで直接作成する方法を学習しました。 ワークスペースは、実験に必要なオブジェクトのコンテナーです。
+
+
+## APPENDIX
+このハンズオンは Microsoft Learningのコンテンツです。
+
+[Azure Machine Learning service の概要](https://docs.microsoft.com/ja-jp/learn/modules/intro-to-azure-machine-learning-service/)
 

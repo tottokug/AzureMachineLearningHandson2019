@@ -163,130 +163,197 @@ Azure portal でワークスペースを作成するには、次の手順を実�
 
 1. ポータル ページに戻り、[実験を表示します] を選択してから、[my-first-experiment] を選択してモデルの実行レポートを表示します。
 
-### Python を使用してワークスペースを作成する
 
-Python を使用してワークスペースを作成するには:
 
-1. Anaconda、Miniconda、Python 仮想環境などの Python 環境をインストールします。
 
-1. 分離された Python 環境を作成します。
+### Azure Notebooks で Python を使用してワークスペースを作成する
+このトレーニングでは、必要なすべてのものが事前に構成されているため、Azure Notebooks を使用してコード例を実行することを強くお勧めします。 [無料の Azure Notebooks サブスクリプション](https://notebooks.azure.com/)で、無料のサブスクリプションを取得してください
 
-1. コマンドラインまたはターミナル ウィンドウを開き、Python 3.6 を使用して myenv という名前の新しい Conda 環境を作成します。
+Azure Notebooks を使用しない場合は、Azure Machine Learning service を使用するようにローカルの Jupyter Notebook 環境を設定する方法について、後で説明しています。
 
-```
-# Create
-conda create -n myenv -y Python=3.6
-# Activate
-conda activate myenv
-```
+Azure Notebooks サブスクリプションを取得したら、サービスにログインします。
 
-4. SDK をインストールします。
+### ノートブックを作成する
+最初に、新しい Azure ノートブックを作成します。 Azure Notebooks は、関連するノートブックをグループ化することを主な目的とするライブラリに含まれています。 このユニットでは、新しいプロジェクトを作成してから、その中にノートブックを作成します。
 
-1. 以下のコードを使用して、Machine Learning SDK と Jupyter Notebook サーバーのコア コンポーネントをインストールします。
 
-```
-# Install Jupyter
-conda install nb_conda
+1. ブラウザーで https://notebooks.azure.com  に移動します。
 
-# Install the base SDK and Jupyter Notebook
-pip install azureml-sdk[notebooks]
-```
+2. ブラウザーで https://notebooks.azure.com  に移動します。
 
-6. Jupyter Notebook を起動します。
+3. 上部のメニュー バーで [マイ プロジェクト] をクリックします。
 
-```
-# Launch
-jupyter notebook
-```
-7. ブラウザーで新しいノートブックを作成し、Python 3 カーネルを選択してから、必要に応じて Azure portal にサインインします。
+![1-add-project-1](./images/1-add-project-1.png)
 
-8. 次の Python コードを実行して、各 {placeholder} をサブスクリプションに適した値に置き換えます。
+プロジェクト ページに移動する
 
-```
-import azureml.core
-print(azureml.core.VERSION)
+4. [+ 新しいプロジェクト] をクリックします。 プロジェクト名に "AMLSLearn" (引用符を除く) と入力し、プロジェクト ID に "amls-learn" を入力します。 [パブリック プロジェクト] ボックスのチェック マークをオフにして、[作成] をクリックします。
 
-from azureml.core import Workspace
-ws = Workspace.create(name='myworkspace',
-            subscription_id='{azure-subscription-id}', 
-            resource_group='{resource-group-name}',
-            create_resource_group = True,
-            location='{location}'
-            )
-```
+![1-add-project-2](./images/1-add-project-2.png)
 
-|フィールド|説明|
-|---|---|
-|ワークスペース名|ワークスペースの一意名を入力します。 この例では、docs-ws を使用します。 名前は、リソース グループ全体で一意である必要があります。 覚えやすく、他のユーザーが作成したワークスペースと異なる名前を使用します。
-|サブスクリプション|使用する Azure サブスクリプションを選択します。|
-|リソース グループ|サブスクリプションの既存のリソース グループを使用するか、任意の名前を入力して新しいリソース グループを作成します。 リソース グループは、Azure ソリューション用に関連するリソースを保持するコンテナーです。 この例では、docs-aml を使用します。|
-|場所|ユーザーとデータ リソースに最も近い場所を選択します。 この場所に、ワークスペースが作成されます。|
+プロジェクトを作成する
 
-9. 関連付けられているストレージ、コンテナー レジストリ、キー コンテナーなど、ワークスペースの詳細を表示するには、次のコードを使用します。
+5. [+] 記号をクリックして、ノートブックをプロジェクトに追加します。
 
-```
-ws.get_details()
-```
+![1-add-notebook-1](./images/1-add-notebook-1.png)
 
-10. 構成ファイルを記述します。
+プロジェクトへのノートブックの追加
 
-ワークスペースの詳細を、現在のディレクトリの JSON 構成ファイルに保存する必要があります。 write_config() アプリケーション プログラミング インターフェイス (API) 呼び出しでは、構成ファイルが現在のディレクトリに作成されます。 config.json ファイルには、以下が含まれています。
+6. ノートブックに "AMLSLearn1.ipynb" という名前を付けて、アイテムの種類として [Python 3.6] ノートブックを選択します。 これにより、Python 3.6 カーネルを使用したノートブックが作成されます。 Jupyter ノートブックの長所の 1 つは、選択するカーネルに応じてさまざまな言語を使用できることです。
+
+![1-add-notebook-2](./images/1-add-notebook-2.png)
+
+ノートブックの作成
+
+ちなみに、.ipynb ファイル名拡張子は、"IPython notebook" の略です。 Jupyter Notebook は、当初は IPython (対話型 Python) ノートブックと呼ばれており、Python のみをプログラミング言語としてサポートしていました。 Jupyter という名前は、Jupyter がサポートする主要なプログラミング言語である Julia、Python、R を組み合わせたものです。
+
+7. 新しいノートブックをクリックします。 これによりノートブックが起動し、編集を開始できるようになります。
+
+![1-open-notebook](./images/1-open-notebook.png)
+
+Azure Notebooks を使用するときに、追加のプロジェクトとノートブックを作成できます。 プロジェクトは、関連するノートブックをグループ化するための手段を提供します。 ノートブックを最初から作成することも、既存のノートブックをアップロードすることもできます。 次のユニットでは、ノートブックを最初から作成し、セルの操作の基本を学習します。
+
+お疲れさまでした。 Azure ノートブックが作成されました。 
+
+
+
+## 演習 - 単純なロジスティック回帰モデル向けのデータを読み込む
+コード例を実行する場合は [Azure Notebooks](https://notebooks.azure.com/) を使用することを強くお勧めします。すべてが事前に構成されており、最新バージョンの Python を入手できるためです。
+
+
+### MNIST データを取得する
+
+ノートブック内のセルで次のコードを実行して、MNIST データセットを取得し、ローカルの data フォルダーに保存します。
 
 ```
-{
-    "subscription_id": "{azure-subscription-id}",
-    "resource_group": "{resource-group-name}",
-    "workspace_name": "myworkspace"
-}
-```
-11. 次のコードで、構成ファイルが作成されます。
-```
-# Create the configuration file.
-ws.write_config()
-```
+import os
+import urllib.request
 
-12. ワークスペースを使用します。
-```
-from azureml.core import Experiment
+#create a folder for the dataset
+os.makedirs('./data', exist_ok = True)
 
-# create an experiment
-exp = Experiment(workspace=ws, name='trial_exp')
-
-# start a run
-run = exp.start_logging()
-
-# log a number
-run.log('trail', 30)
-
-# log a list (Fibonacci numbers)
-run.log_list('my list', [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]) 
-
-# finish the run
-run.complete()
+# load dataset to the directory--as you can see, you must load train sets and test sets separately
+urllib.request.urlretrieve('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz', filename='./data/train-images.gz')
+urllib.request.urlretrieve('http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz', filename='./data/train-labels.gz')
+urllib.request.urlretrieve('http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz', filename='./data/test-images.gz')
+urllib.request.urlretrieve('http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz', filename='./data/test-labels.gz')
 ```
 
-13. ログに記録された結果を表示します。
+出力は次のようになります: ('./data/test-labels.gz', <http.client.HTTPMessage object at 0x00000247D0FE6080>)。 data という名前のフォルダーが作成され、イメージおよびラベルのテスト データとトレーニング データを含む、gzip 圧縮された 4 つのファイルが格納されます。
+
+### データセットを分割します。
+次の手順では、データをトレーニング セットとテスト セットに分割します。 圧縮ファイルを読み込み、処理可能な numpy 配列を返す関数が必要となります。 utils.py という名前のファイルに次のコードを保存します。
+
 ```
-print(run.get_portal_url())
+import gzip
+import numpy as np
+import struct
+
+# load compressed MNIST gz files and return numpy arrays
+def load_data(filename, label=False):
+    with gzip.open(filename) as gz:
+        struct.unpack('I', gz.read(4))
+        n_items = struct.unpack('>I', gz.read(4))
+        if not label:
+            n_rows = struct.unpack('>I', gz.read(4))[0]
+            n_cols = struct.unpack('>I', gz.read(4))[0]
+            res = np.frombuffer(gz.read(n_items[0] * n_rows * n_cols), dtype=np.uint8)
+            res = res.reshape(n_items[0], n_rows * n_cols)
+        else:
+            res = np.frombuffer(gz.read(n_items[0]), dtype=np.uint8)
+            res = res.reshape(n_items[0], 1)
+    return res
+
+print('Functions defined')
 ```
-リンクでは、Azure portal のログに記録された値に移動します。
 
-14. リソースをクリーンアップします。
+load_data ヘルパー関数が定義され、以下のコードでこれを使用してデータを読み込むことができるようになりました。
+
+
 ```
-ws.delete(delete_dependent_resources=True)
+# To help the model converge faster, shrink the intensity values (X) from 0-255 to 0-1
+
+X_train = load_data('./data/train-images.gz', False) / 255.0
+y_train = load_data('./data/train-labels.gz', True).reshape(-1)
+
+X_test = load_data('./data/test-images.gz', False) / 255.0
+y_test = load_data('./data/test-labels.gz', True).reshape(-1)
+
+print('Data loaded')
 ```
 
+### サンプル画像を表示する
+データを読み込んだことを確認するために、matplotlib を使用してサンプル画像 + ラベルの 1 つを表示してみましょう。 これを実行するには 1 から 2 分ほどかかることがあります。
 
-## まとめ
-Azure Machine Learning service では機械学習モデルをスケーリング、監視、デプロイするための呼び出し可能なサービスが提供されることを学習しました。 それは、統合された Azure サービスでデータ サイエンス パイプラインを強化および拡張するためのものです。 Azure Machine Learning service SDK を使用すると、必要なときに必要なサービスをどれでも使用することができます。
 
-好みの Python ツールとオープン ソース フレームワークを使用して、ローカル コンピューターでモデルの開発を始めることができます。 その後、Python モジュールを通して Azure Machine Learning service を使用し、モデルのトレーニングと評価、ハイパーパラメーターの調整、および呼び出し可能な REST API を使用した完全なデプロイを短時間で行うことができます。
+```
+import matplotlib.pyplot as plt
+import numpy as np
 
-自動化された機械学習パイプラインを作成するためのデータ サイエンス プロセスのさまざまなステップに Azure Machine Learning service を適用する方法を学習しました。 ポータルを使用して Azure Machine Learning ワークスペースを作成する方法と、Python スクリプトで直接作成する方法を学習しました。 ワークスペースは、実験に必要なオブジェクトのコンテナーです。
+count = 0
+sample_size = 30
+plt.figure(figsize = (16, 6))
+for i in np.random.permutation(X_train.shape[0])[:sample_size]:
+    count = count + 1
+    plt.subplot(1, sample_size, count)
+    plt.axhline('')
+    plt.axvline('')
+    plt.text(x=10, y=-10, s=y_train[i], fontsize=18)
+    plt.imshow(X_train[i].reshape(28, 28), cmap=plt.cm.Greys)
+    
+plt.show()
+
+print('Done')
+```
+
+次のような画像が表示されます。
+
+![2-hand-written](./images/2-hand-written.png)
+
+### 演習 - Scikit-learn を使用してロジスティック回帰モデルを実行する
+
+ロジスティック回帰アルゴリズムは、応答変数がカテゴリ別の場合に使用される回帰モデルです。 ここでは、よく使われる scikit-learn パッケージをインポートしてアルゴリズムを実装します。
+
+次のコードを使用して、ロジスティック回帰モデルを実行し、モデルの精度を出力します。 実行が完了するには数分かかることがあります。
+
+```
+from sklearn.linear_model import LogisticRegression
+
+#load the model
+clf = LogisticRegression()
+#fit the model
+clf.fit(X_train, y_train)
+
+#evaluate the model by using a test set
+y_hat = clf.predict(X_test)
+#print the accuracy
+print(np.average(y_hat == y_test))
+
+print('Done')
+```
+
+## 演習 - 機械学習の実験を作成する
+
+ローカル コンピューターの容量によっては、さまざまな値のパラメーターにモデルを合わせたり、最適な結果を返す k の値を見つけるのに時間がかかることがあります。 この場合は、リモート クラスターでモデルの実行を試す必要があります。
+
+### 実行と実験の概要
+
+始める前に、実行と実験という 2 つの概念を理解する必要があります。
+
+Azure Machine Learning service における実行は、特定のタスク (モデルのトレーニングや_ハイパーパラメーター_のチューニングなど) の Python コードを指します。 実行によってメトリックがログ記録され、Azure プラットフォームに結果がアップロードされます。これは、ワークスペース内のジョブを追跡する方法として、より自然です。
+
+実験は、一連の実行の構成を指す用語です。 例では、ロジスティック回帰モデル向けの実行が 1 つと、kNN モデル向けの実行が 1 つあります。これらが、結果を比較するための実験を構成しています。
+
+### 実験を作成する
+
+
+
 
 
 ## APPENDIX
-このハンズオンは Microsoft Learningのコンテンツです。
+このハンズオンは Microsoft Learningのコンテンツを元にしています。
 
 [Azure Machine Learning service の概要](https://docs.microsoft.com/ja-jp/learn/modules/intro-to-azure-machine-learning-service/)
+
+[Azure Machine Learning service を使用したローカル ML モデルのトレーニング](https://docs.microsoft.com/ja-jp/learn/modules/train-local-model-with-azure-mls/2-simple-log-regression-model)
 

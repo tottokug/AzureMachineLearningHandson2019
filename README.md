@@ -8,16 +8,18 @@ Azure Machine Learning service を使用すると、データ ラングリング
 ### 学習の目的
 このモジュールでは、次のことを行います。
 
-Azure Machine Learning Studio と Azure Machine Learning service の違いについて学習する
-Azure Machine Learning service がデータ サイエンス プロセスにどのように適合するかを確認する
-Azure Machine Learning service の実験に関連する概念について学習する
-Azure Machine Learning service のパイプラインを調べる
-Azure Machine Learning service を使用してモデルをトレーニングする
+- Azure Machine Learning service がデータ サイエンス プロセスにどのように適合するかを確認する
+
+- Azure Machine Learning service の実験に関連する概念について学習する
+- Azure Machine Learning service のパイプラインを調べる
+- Azure Machine Learning service を使用してモデルをトレーニングする
 
 ## Azure Machine Learning service と Azure Machine Learning Studio
 名前が似ているので、Microsoft Azure Machine Learning Studio と Azure Machine Learning service を区別することが重要です。 これらの製品はどちらも機械学習モデルの開発とデプロイに使用できますが、サポートするニーズは異なります。
+
 ### Azure Machine Learning Studio 
 ユーザー フレンドリでプログラミングの必要がないドラッグ アンド ドロップ方式のビジュアル ワークスペースです。 データ サイエンスの学習と小規模な機械学習プロジェクトに最適です。
+
 ### Azure Machine Learning service
 機械学習モデルをスケーリング、監視、デプロイするための呼び出し可能なサービスが提供されます。 それは、統合された Azure サービスでデータ サイエンス パイプラインを強化および拡張するためのものです。 Azure Machine Learning service SDK を使用すると、このような事前構築済みサービスを使用するコードを記述し、それをデータ サイエンス ワークフローに統合することができます。
 
@@ -57,7 +59,7 @@ Docker イメージを作成し、Azure Container Instances にデプロイし�
 環境ファイルは、オープン ソース パッケージを使用する場合に重要なパッケージの依存関係を指定するために必要です。
 構成ファイルは、適切な量のリソースをコンテナーに要求するために必要です。
 
-## 械学習の実験を作成する
+## 機械学習の実験を作成する
 Azure Machine Learning service の主要なコンポーネントについて考えてみましょう。 次の図は、Azure Machine Learning service 内のデータ サイエンス プロセスを示しています。
 
 ![key-components-ml-workspace](./images/4-key-components-ml-workspace.png)

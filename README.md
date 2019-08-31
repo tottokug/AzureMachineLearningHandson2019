@@ -347,8 +347,8 @@ Azure Machine Learning service における実行は、特定のタスク (モ�
 
 実験は、一連の実行の構成を指す用語です。 例では、ロジスティック回帰モデル向けの実行が 1 つと、kNN モデル向けの実行が 1 つあります。これらが、結果を比較するための実験を構成しています。
 
-### 実験を作成する
-実験を作成する最初の手順では、Machine Learning サービス ワークスペースを作成します。 この操作は Azure portal で、または Azure ML SDK を使用して Python で実行できます。 Python を使用するには、Azure サブスクリプション ID を指定する必要があります。サブスクリプションは、Azure portal で左サイドバーの [サブスクリプション] 項目を使用するか、またはグローバル検索ボックスに「Subscriptions」と入力することで、見つけることができます。
+### 実験を利用/作成する
+実験を作成する最初の手順では、Machine Learning サービス ワークスペースを作成します。すでにある場合はNotebook上からワークスペースにアクセスできるようにします。 この操作は Azure portal で、または Azure ML SDK を使用して Python で実行できます。 Python を使用するには、Azure サブスクリプション ID を指定する必要があります。サブスクリプションは、Azure portal で左サイドバーの [サブスクリプション] 項目を使用するか、またはグローバル検索ボックスに「Subscriptions」と入力することで、見つけることができます。
 
 ![3-subscriptions](./images/3-subscriptions.png)
 
@@ -357,13 +357,22 @@ Azure Machine Learning service における実行は、特定のタスク (モ�
 ```python
 from azureml.core import Workspace,Experiment,Run
 
-ws = Workspace.create(
-            name='AMLSWorkspace',
-            subscription_id='{azure-subscription-id}', 
-            resource_group='{resource_group}',
-            create_resource_group=True,
-            location='japaneast'
+ws = Workspace.get(
+            name='{YOUR WORKSPACE NAME}',
+            subscription_id='{YOUR SUBSCRIPTION ID}', 
+            resource_group='{YOUR RESOURCE GROUP NAME}',
 )
+
+# 新しく作成する場合はcreateを使う
+# ws = Workspace.create(
+#             name='AMLSWorkspace',
+#             subscription_id='{azure-subscription-id}', 
+#             resource_group='{resource_group}',
+#             create_resource_group=True,
+#             location='japaneast'
+# )
+
+
 ```
 
 

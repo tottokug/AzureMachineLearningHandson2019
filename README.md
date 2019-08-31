@@ -638,6 +638,19 @@ print(run.get_metrics())
 ```
 
 
+## モデルの保存
+
+トレーニングしたモデルは、Machine Learning Serviceで、世代管理することが可能です。
+
+
+```python
+model = run.register_model(model_name='sklearn_mnist', model_path='outputs/knn_mnist_model.pkl')
+print(model.name, model.id, model.version, sep='\t')
+
+```
+
+
+
 ### クリーンアップ
 
 お使いの Azure アカウントでコストが増えるのを避けるため、このラーニング パスに作成したリソース グループを削除してください。 このモジュールで作成したすべてのリソースを削除するには、次の手順に従います。

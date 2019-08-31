@@ -228,7 +228,7 @@ Azure Notebooks を使用するときに、追加のプロジェクトとノー�
 
 ノートブック内のセルで次のコードを実行して、MNIST データセットを取得し、ローカルの data フォルダーに保存します。
 
-```
+```python
 import os
 import urllib.request
 
@@ -247,7 +247,7 @@ urllib.request.urlretrieve('http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ub
 ### データセットを分割します。
 次の手順では、データをトレーニング セットとテスト セットに分割します。 圧縮ファイルを読み込み、処理可能な numpy 配列を返す関数が必要となります。 utils.py という名前のファイルに次のコードを保存します。
 
-```
+```python
 import gzip
 import numpy as np
 import struct
@@ -273,7 +273,7 @@ print('Functions defined')
 load_data ヘルパー関数が定義され、以下のコードでこれを使用してデータを読み込むことができるようになりました。
 
 
-```
+```python
 # To help the model converge faster, shrink the intensity values (X) from 0-255 to 0-1
 
 X_train = load_data('./data/train-images.gz', False) / 255.0
@@ -289,7 +289,7 @@ print('Data loaded')
 データを読み込んだことを確認するために、matplotlib を使用してサンプル画像 + ラベルの 1 つを表示してみましょう。 これを実行するには 1 から 2 分ほどかかることがあります。
 
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -319,7 +319,7 @@ print('Done')
 
 次のコードを使用して、ロジスティック回帰モデルを実行し、モデルの精度を出力します。 実行が完了するには数分かかることがあります。
 
-```
+```python
 from sklearn.linear_model import LogisticRegression
 
 #load the model
@@ -354,7 +354,7 @@ Azure Machine Learning service における実行は、特定のタスク (モ�
 
 使用するサブスクリプションを見つけて、以下の {azure-subscription-id} 値をサブスクリプション ID 値に置き換えます。 Azure アカウントにまだサインインしていない場合は、SDK によってサインインを求められます。
 
-```
+```python
 from azureml.core import Workspace,Experiment,Run
 
 ws = Workspace.create(
@@ -373,7 +373,7 @@ Workspace.create 関数は、プロセスで使用する、作成された Works
 Workspace オブジェクトで、Azure ML SDK を使用して Experiment と run を作成できます。
 
 
-```
+```python
 from azureml.core import Experiment
 #Create an experiment
 experiment = Experiment(workspace = ws, name = "my-first-experiment")
@@ -389,7 +389,7 @@ run.complete()
 ジョブが完了すると、次のコードには、実行したジョブに関する詳細が表示されます。
 
 
-```
+```python
 from azureml.widgets import RunDetails
 
 RunDetails(run).show()
@@ -397,7 +397,7 @@ RunDetails(run).show()
 
 Azure portal で実験の実行を表示できます。 前回の実行に関する結果にリンクする URL を出力するには、次のコードを使用します。
 
-```
+```python
 print(run.get_portal_url())
 ```
 
@@ -431,7 +431,7 @@ HyperDrive の使用は今回のハンズオンでは取り扱いませんが、
 
 最初の手順として、リモート コンピューティング ターゲットを作成します。
 
-```
+```python
 from azureml.core.compute import AmlCompute
 from azureml.core.compute import ComputeTarget
 import os
@@ -457,7 +457,7 @@ print('Compute target created')
 
 データ ソースの場所と形式に応じて、データをモデルにパイプするためのさまざまな方法があります。 たとえば、作成された Workspace オブジェクトを使用して既定のデータストアを取得し、Azure Blob ストレージにデータをアップロードできます。
 
-```
+```python
 #upload data by using get_default_datastore()
 ds = ws.get_default_datastore()
 ds.upload(src_dir='./data', target_path='mnist', overwrite=True, show_progress=True)
@@ -465,7 +465,7 @@ ds.upload(src_dir='./data', target_path='mnist', overwrite=True, show_progress=T
 
 次に、トレーニング Python コードを保存するディレクトリを作成します。
 
-```
+```python
 import os
 
 # create the folder
@@ -481,7 +481,7 @@ os.makedirs(folder_training_script, exist_ok=True)
 - kinterval は、各 k の間隔を決定します。
 
 
-```
+```python
 %%writefile $folder_training_script/train.py
 
 import argparse
@@ -582,7 +582,7 @@ print('Training script saved')
 - トレーニング スクリプトに必要なパラメーター。
 - トレーニングに必要な Python パッケージ。
 
-```
+```python
 from azureml.train.estimator import Estimator
 
 script_params = {
@@ -602,7 +602,7 @@ est = Estimator(source_directory=folder_training_script,
 ### モデルを送信し、実行を監視して、結果を取得する
 モデル トレーニングを実行する実験を作成する必要があります。
 
-```
+```python
 from azureml.core import Experiment
 
 #Create an experiment
@@ -614,7 +614,7 @@ print('Experiment created')
 
 
 
-```
+```python
 run = experiment.submit(config=est)
 run
 ```
@@ -625,7 +625,7 @@ run
 
 azureml パッケージのウィジェット モジュールを使用して、実行を監視できます。
 
-```
+```python
 # monitor the run
 from azureml.widgets import RunDetails
 
@@ -641,7 +641,7 @@ RunDetails(run).show()
 ![7-job-completion](./images/7-job-completion.png)
 この実行が完了したら、結果を出力できます。 結果が記録されているのは、トレーニング スクリプトでコードを記述したからです。
 
-```
+```python
 #get the result
 print(run.get_metrics())
 ```

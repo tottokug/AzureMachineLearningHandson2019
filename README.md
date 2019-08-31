@@ -137,6 +137,9 @@ Azure portal でワークスペースを作成するには、次の手順を実�
 
 ![create-ml-service-workspace](./images/6-create-ml-service-workspace.png)
 
+リソースグループは今回のハンズオンのために、作成することをおすすめします。
+
+
 5. 新しく作成したワークスペースを開き、AssetsからExperimentsを
 
 ![DeployComplete](./images/DeployComplete.png)
@@ -167,7 +170,7 @@ Azure portal でワークスペースを作成するには、次の手順を実�
 
 
 ### Azure Notebooks で Python を使用してワークスペースを作成する
-このトレーニングでは、必要なすべてのものが事前に構成されているため、Azure Notebooks を使用してコード例を実行することを強くお勧めします。 [無料の Azure Notebooks サブスクリプション](https://notebooks.azure.com/)で、無料のサブスクリプションを取得してください
+このハンズオンでは、必要なすべてのものが事前に構成されているため、Azure Notebooks を使用してコード例を実行することを強くお勧めします。 [無料の Azure Notebooks サブスクリプション](https://notebooks.azure.com/)で、無料のサブスクリプションを取得してください
 
 Azure Notebooks を使用しない場合は、Azure Machine Learning service を使用するようにローカルの Jupyter Notebook 環境を設定する方法について、後で説明しています。
 

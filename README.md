@@ -352,6 +352,39 @@ Azure Machine Learning service における実行は、特定のタスク (モ�
 
 ![3-subscriptions](./images/3-subscriptions.png)
 
+使用するサブスクリプションを見つけて、以下の {azure-subscription-id} 値をサブスクリプション ID 値に置き換えます。 Azure アカウントにまだサインインしていない場合は、SDK によってサインインを求められます。
+
+```
+from azureml.core import Workspace,Experiment,Run
+
+ws = Workspace.create(
+            name='AMLSWorkspace',
+            subscription_id='{azure-subscription-id}', 
+            resource_group='{resource_group}',
+            create_resource_group=True,
+            location='japaneast'
+)
+```
+
+
+Workspace.create 関数は、プロセスで使用する、作成された Workspace オブジェクトを返します。 このオブジェクトを変数 ws に格納します。
+
+
+Workspace オブジェクトで、Azure ML SDK を使用して Experiment と run を作成できます。
+
+
+```
+from azureml.core import Experiment
+#Create an experiment
+experiment = Experiment(workspace = ws, name = "my-first-experiment")
+
+#Create a run
+run = experiment.start_logging()
+run.log("trial",1)
+run.complete()
+```
+
+
 ## ログに記録された結果を表示する
 ジョブが完了すると、次のコードには、実行したジョブに関する詳細が表示されます。
 

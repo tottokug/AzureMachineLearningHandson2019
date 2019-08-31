@@ -432,6 +432,7 @@ min_nodes = os.environ.get("AML_COMPUTE_CLUSTER_MIN_NODES", 0)
 max_nodes = os.environ.get("AML_COMPUTE_CLUSTER_MAX_NODES", 3)
 
 # Step 2: choose environment variables 
+# 1時間あたり、1台に付き約11円かかります。
 vm_size = os.environ.get("AML_COMPUTE_CLUSTER_SKU", "STANDARD_D2_V2")
 
 provisioning_config = AmlCompute.provisioning_configuration(
